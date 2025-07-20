@@ -1,6 +1,9 @@
 # Netflix gpt
 
 -configured tailwindcss
+-Header
+-Login Form
+-Signup
 
 
 
