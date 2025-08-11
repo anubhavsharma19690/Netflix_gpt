@@ -8,6 +8,7 @@
 -form validation -useRef
 -firebase setup
 -deploy app
+-SIGNUP USER account
 
 # Features
 
