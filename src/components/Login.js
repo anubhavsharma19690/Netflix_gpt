@@ -1,18 +1,22 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { checkValidData } from '../utils/validate'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import { auth } from '../utils/firebase'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
 
   const [isSignInForm, setIsSignInForm] = useState(true)
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const name = useRef(null)
   const email = useRef(null)
   const password = useRef(null)
+  const dispatch = useDispatch();
 
 
   const handleButtonClick = () => {
@@ -33,19 +37,47 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up 
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value, photoURL: "https://media.licdn.com/dms/image/v2/D5603AQEYXBzFcL7ZRg/profile-displayphoto-crop_800_800/B56ZgoU4pdHUAI-/0/1753023221764?e=1757548800&v=beta&t=sTgV15pAlz4bGM1mkaBmr2DpCkJi-iWjl-aPUI_OdCQ"
+          }).then(() => {
+            // Profile updated!
+            const { uid, email, displayName, photoURL } = auth.currentUser;
+            dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }));
+            navigate("/browse")
+            // ...
+          }).catch((error) => {
+            setErrorMessage(error.message);
+          });
+
+
           console.log(user, "user");
+
 
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode + " " + errorMessage);
+          // setErrorMessage(errorCode + " " + errorMessage);
+          setErrorMessage("User already exists with this email");
           // ..
         });
     }
     else {
       //Signin logic
+      signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log("user signed in", user);
+          navigate("/browse")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // setErrorMessage(errorCode + " " + errorMessage);
+          setErrorMessage("Invalid email or password");
+        });
 
     }
 

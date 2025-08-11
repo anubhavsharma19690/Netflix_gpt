@@ -9,6 +9,11 @@
 -firebase setup
 -deploy app
 -SIGNUP USER account
+-Singin user api
+-redux store with user slice
+-Implemented Signout
+-Update profile
+-Fetch from tmdb movies
 
 # Features
 
