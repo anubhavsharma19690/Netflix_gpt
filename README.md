@@ -14,7 +14,10 @@
 -Implemented Signout
 -Update profile
 -Fetch from tmdb movies
-
+-unsubscribe to the onAuthStateChanged callback
+-add hardcoded values to the constant files
+- register tmdb
+-get data from new movies api
 # Features
 
 - Login/Signup
