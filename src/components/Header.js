@@ -19,7 +19,7 @@ const Header = () => {
         navigate("/error");
       });
   };
-
+  console.log("auth", auth, "user", user);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -52,13 +52,13 @@ const Header = () => {
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
-        className="w-44"
+        className="w-36"
         src={LOGO} alt="Netflix Logo" />
       {/* <img className="w-44" src="/Setflixlogo.png" alt="Netflix Logo" /> */}
       {user && (
         <div className="flex p-2">
           <img
-            className="w-12 h-12 "
+            className="w-10 h-10 "
             alt="User icon"
             // src="/netflix_usericon.jpg"
             src={user?.photoURL}

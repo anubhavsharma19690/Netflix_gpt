@@ -11,7 +11,7 @@ const VideoBackgound = ({ movieId }) => {
 
 
     return (
-        <div className=''>
+        <div>
             <iframe
                 className='w-screen aspect-video'
                 src={`https://www.youtube.com/embed/${trailerVideo?.key}?autoplay=1&mute=1`}

@@ -27,6 +27,7 @@
 - Update store with trailer video data
 - embeded youtube video made it auto play
 - Tailwind classed in main container
+- Build Secondary Component
 
 # Features
 
