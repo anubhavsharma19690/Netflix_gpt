@@ -29,7 +29,7 @@ const Login = () => {
       name?.current?.value
     );
 
-    console.log(message, "message");
+   
 
     setErrorMessage(message);
     if (message) return;
@@ -47,7 +47,7 @@ const Login = () => {
           // Signed up
           debugger;
           const user = userCredential.user;
-          console.log("user signed up", user);
+      
           debugger;
           updateProfile(user, {
             displayName: name.current.value,
@@ -72,7 +72,7 @@ const Login = () => {
               setErrorMessage(error.message);
             });
 
-          console.log("user", user);
+        
 
         })
         .catch((error) => {
@@ -92,7 +92,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("user signed in", user);
+      
         })
         .catch((error) => {
           const errorCode = error.code;

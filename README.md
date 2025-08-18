@@ -16,8 +16,18 @@
 -Fetch from tmdb movies
 -unsubscribe to the onAuthStateChanged callback
 -add hardcoded values to the constant files
+
 - register tmdb
--get data from new movies api
+  -get data from new movies api
+  -created custom hook for now playong movies
+  -created movieSlice
+  -update store with movie data
+- Planning for main container and secondary container
+- fetch Dadta for tailer video
+- Update store with trailer video data
+- embeded youtube video made it auto play
+- Tailwind classed in main container
+
 # Features
 
 - Login/Signup

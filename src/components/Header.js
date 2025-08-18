@@ -19,7 +19,7 @@ const Header = () => {
         navigate("/error");
       });
   };
-  console.log("auth", auth, "user", user);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
