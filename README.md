@@ -28,6 +28,11 @@
 - embeded youtube video made it auto play
 - Tailwind classed in main container
 - Build Secondary Component
+- Build Movie list
+- Build Movie Card
+- Tmdb image cdn ul
+  -usePopularMovies custom hook
+- Gpt search feature  
 
 # Features
 
