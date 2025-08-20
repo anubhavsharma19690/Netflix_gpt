@@ -10,12 +10,7 @@ const GptSearchBar = () => {
     const dispatch = useDispatch();
     const langKey = useSelector((store) => store.config.lang);
     const searchText = useRef(null);
-    console.log("API Key:", process.env.REACT_APP_GEMINI_API_KEY);
-
-    if (!process.env.REACT_APP_GEMINI_API_KEY) {
-        console.log("Gemini API key is missing!");
-
-    }
+  
 
     // const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
