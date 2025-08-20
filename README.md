@@ -33,6 +33,9 @@
 - Tmdb image cdn ul
   -usePopularMovies custom hook
 - Gpt search feature  
+- gpt search page
+- gpt search bar
+- multi lang feature
 
 # Features
 
