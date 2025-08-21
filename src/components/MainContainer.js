@@ -6,11 +6,13 @@ import VideoBackgound from './VideoBackgound'
 const MainContainer = () => {
     const movies = useSelector((store) => store.movies?.nowPlayingMovies)
 
-  
 
-    if (movies === null) {
-        return
+
+    // Return early if no movies are available
+    if (!movies || movies.length === 0) {
+        return null; // or return a loading spinner/placeholder
     }
+
     const mainMovie = movies[0]
 
 
