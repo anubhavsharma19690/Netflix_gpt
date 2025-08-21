@@ -32,18 +32,19 @@ const GptSearchBar = () => {
 
         try {
             // Initialize Gemini model
-         const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-pro"  // Corrected model name
-        });
+        //  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+        // const model = genAI.getGenerativeModel({ 
+        //     model: "gemini-pro"  // Corrected model name
+        // });
 
 
 
-            const prompt = `Act as a movie recommendation system and suggest exactly 5 movies based on this request: ${searchText.current.value}. Return ONLY movie titles separated by commas, nothing else. For example: "Movie1, Movie2, Movie3, Movie4, Movie5"`;
+            // const prompt = `Act as a movie recommendation system and suggest exactly 5 movies based on this request: ${searchText.current.value}. Return ONLY movie titles separated by commas, nothing else. For example: "Movie1, Movie2, Movie3, Movie4, Movie5"`;
 
-            const result = await model.generateContent(prompt);
-            const response = await result.response;
-            const movieList = response.text().split(",").map(movie => movie.trim());
+            // const result = await model.generateContent(prompt);
+            // const response = await result.response;
+            // const movieList = response.text().split(",").map(movie => movie.trim());
+            const movieList = ["Iron man", "Hulk", "Spider", "Incredible", "Saiyaara"]; // For testing purposes, replace with response.text().split(",").map(movie => movie.trim());
 
             // Search for each recommended movie
             const promiseArray = movieList.map(movie => searchMovieTmdb(movie));
