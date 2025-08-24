@@ -64,11 +64,11 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <img className="w-36" src={LOGO} alt="Netflix Logo" />
+    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+      <img className="w-36 mx-auto md:mx-0" src={LOGO} alt="Netflix Logo" />
       {/* <img className="w-44" src="/Setflixlogo.png" alt="Netflix Logo" /> */}
       {user && (
-        <div className="flex p-2">
+        <div className="flex p-3 justify-between">
           {showgptSearch && <select className="p-2 m-2 bg-gray-900 text-white rounded-lg" onChange={handleLanguageChange}>
             {SUPPORTED_LANGUAGES.map((lang) => <option key={lang.identifier} value={lang.identifier} >{lang.name}</option>)}
 
@@ -77,8 +77,9 @@ const Header = () => {
             onClick={handleGptSearchClick}>
             {showgptSearch ? "Home" : "GPT Search"}
           </button>
+
           <img
-            className="w-10 h-10 "
+            className="hidden md:block w-10 h-10 rounded mt-2 "
             alt="User icon"
             // src="/netflix_usericon.jpg"
             src={user?.photoURL}

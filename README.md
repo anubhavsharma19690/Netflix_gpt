@@ -36,6 +36,15 @@
 - gpt search page
 - gpt search bar
 - multi lang feature
+-gpt serach open ai key
+-gpt api call
+-memoization
+-fetched gpt movie suggestions from tmdb
+-glt slice
+-reuused movielist comp
+-.env file
+-.env file to git ignore
+-responsive
 
 # Features
 

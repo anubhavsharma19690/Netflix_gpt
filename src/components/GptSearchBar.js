@@ -10,7 +10,7 @@ const GptSearchBar = () => {
     const dispatch = useDispatch();
     const langKey = useSelector((store) => store.config.lang);
     const searchText = useRef(null);
-  
+
 
     // const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
@@ -32,10 +32,10 @@ const GptSearchBar = () => {
 
         try {
             // Initialize Gemini model
-        //  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
-        // const model = genAI.getGenerativeModel({ 
-        //     model: "gemini-pro"  // Corrected model name
-        // });
+            //  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+            // const model = genAI.getGenerativeModel({ 
+            //     model: "gemini-pro"  // Corrected model name
+            // });
 
 
 
@@ -105,9 +105,9 @@ const GptSearchBar = () => {
     };
 
     return (
-        <div className="pt-[10%] flex justify-center">
+        <div className="pt-[35%]   md:pt-[10%] flex justify-center">
             <form
-                className="w-1/2 bg-black grid grid-cols-12"
+                className="w-full md:w-1/2 bg-black grid grid-cols-12"
                 onSubmit={(e) => e.preventDefault()}
             >
                 <input
