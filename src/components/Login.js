@@ -124,7 +124,7 @@ const Login = () => {
           }}
           className="w-full md:w-1/4 absolute p-12 bg-black my-36 mx-auto left-0 right-0 text-white rounded-lg bg-opacity-80"
         >
-          <h1 className="font-bold text-3xl py-4">
+          <h1 className="font-bold text-3xl py-4 ">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
 
@@ -166,6 +166,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+
   );
 };
 

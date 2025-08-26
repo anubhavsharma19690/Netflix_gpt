@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import openai from "../utils/openai";
@@ -11,10 +11,15 @@ const GptSearchBar = () => {
     const langKey = useSelector((store) => store.config.lang);
     const searchText = useRef(null);
 
+    const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
-    // const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
     console.log("selectedLangugae", langKey);
+
+
+
+
+
 
     // Search movie in tmdb
     const searchMovieTmdb = async (movie) => {
@@ -23,36 +28,31 @@ const GptSearchBar = () => {
             API_OPTIONS
         );
 
-
         const json = await data.json();
         return json.results;
     };
 
     const handleGptSearchClick = async () => {
-
         try {
-            // Initialize Gemini model
-            //  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
-            // const model = genAI.getGenerativeModel({ 
-            //     model: "gemini-pro"  // Corrected model name
-            // });
 
+            const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+            const prompt = `Act as a movie recommendation system and suggest exactly 5 movies based on this request: ${searchText.current.value}. Return ONLY movie titles separated by commas, nothing else. For example: "Movie1, Movie2, Movie3, Movie4, Movie5"`;
+            const result = await model.generateContent(prompt);
 
+            const movieList = result.response.text();
 
-            // const prompt = `Act as a movie recommendation system and suggest exactly 5 movies based on this request: ${searchText.current.value}. Return ONLY movie titles separated by commas, nothing else. For example: "Movie1, Movie2, Movie3, Movie4, Movie5"`;
+            console.log("movieList", movieList);
 
-            // const result = await model.generateContent(prompt);
-            // const response = await result.response;
-            // const movieList = response.text().split(",").map(movie => movie.trim());
-            const movieList = ["Iron man", "Hulk", "Spider", "Incredible", "Saiyaara"]; // For testing purposes, replace with response.text().split(",").map(movie => movie.trim());
+            // const movieList = ["Iron man", "Hulk", "Spider", "Incredible", "Saiyaara"];
 
             // Search for each recommended movie
-            const promiseArray = movieList.map(movie => searchMovieTmdb(movie));
+            const promiseArray = movieList.map((movie) => searchMovieTmdb(movie));
             const tmdbResults = await Promise.all(promiseArray);
 
             // Dispatch results to Redux store
-            dispatch(addgptMovieResult({ movieNames: movieList, movieResults: tmdbResults }));
-
+            dispatch(
+                addgptMovieResult({ movieNames: movieList, movieResults: tmdbResults })
+            );
         } catch (error) {
             console.error("Error fetching movies:", error);
         }
@@ -90,34 +90,49 @@ const GptSearchBar = () => {
 
         // const gptMovies = gptResults.choices?.[0]?.message?.content.split(",");
 
-
-
         // For Each movie I will call search  TMDB Api and get the movie details
         // const promiseArray = gptMovies?.map((movie) => searchMovieTmdb(movie))
-
-
 
         // // will get array of promises
         // const tmdbResults = await Promise.all(promiseArray); // will get array of results
         // console.log("TMDB Results:", tmdbResults);
         // dispatch(addgptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }))
-
     };
 
     return (
-        <div className="pt-[35%]   md:pt-[10%] flex justify-center">
+        // <div className="pt-[35%]   md:pt-[10%] flex justify-center">
+        //     <form
+        //         className="w-full md:w-1/2 bg-black grid grid-cols-12"
+        //         onSubmit={(e) => e.preventDefault()}
+        //     >
+        //         <input
+        //             ref={searchText}
+        //             type="text"
+        //             className="p-4 m-4 col-span-9"
+        //             placeholder={lang[langKey].gptSearchPlaceholder}
+        //         />
+        //         <button
+        //             className="py-2 px-4 m-4 bg-red-700 text-white rounded-lg col-span-3"
+        //             onClick={handleGptSearchClick}
+        //         >
+        //             {lang[langKey].search}
+        //         </button>
+        //     </form>
+        // </div>
+
+        <div className="pt-[35%] md:pt-[10%] flex justify-center">
             <form
-                className="w-full md:w-1/2 bg-black grid grid-cols-12"
+                className="w-full md:w-1/2 bg-black/80 grid grid-cols-12 p-6 rounded-lg backdrop-blur-sm shadow-2xl border border-gray-800 hover:shadow-red-500/20 transition-all duration-300"
                 onSubmit={(e) => e.preventDefault()}
             >
                 <input
                     ref={searchText}
                     type="text"
-                    className="p-4 m-4 col-span-9"
+                    className="p-4 m-2 col-span-9 bg-gray-700 text-white rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 hover:bg-gray-600"
                     placeholder={lang[langKey].gptSearchPlaceholder}
                 />
                 <button
-                    className="py-2 px-4 m-4 bg-red-700 text-white rounded-lg col-span-3"
+                    className="col-span-3 m-2 bg-red-700 text-white rounded-lg font-semibold hover:bg-red-600 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg border-2 border-transparent hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                     onClick={handleGptSearchClick}
                 >
                     {lang[langKey].search}
