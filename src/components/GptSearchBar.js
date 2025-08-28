@@ -33,7 +33,8 @@ const GptSearchBar = () => {
 
     const handleGptSearchClick = async () => {
         const geminiresults = await generateContent(searchText.current.value);
-        const movieList = geminiresults.split(",").map((item) => item.trim());
+        const movieList = geminiresults.replace('"', '').split(",").map((item) => item.trim());
+        console.log("movieList", movieList);
 
         // For Each movie I will call search  TMDB Api and get the movie details
         const promiseArray = movieList?.map((movie) => searchMovieTmdb(movie));

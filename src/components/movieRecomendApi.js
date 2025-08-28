@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const GEMINI_API_KEY = "AIzaSyApnbebIfcUnFPuau3D6cxjpbBmvpAY_OE"; // <-- Replace with your actual key
-const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY; // <-- Replace with your actual key
+const GEMINI_API_KEY = "AIzaSyApnbebIfcUnFPuau3D6cxjpbBmvpAY_OE"; // <-- Replace with your actual key
+// const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY; // <-- Replace with your actual key
 
 export async function generateContent(userPrompt) {
     try {
