@@ -10,7 +10,7 @@ import {
     generateContent,
     getEmbedding,
     queryHF,
-} from "./huggingfaceAPI";
+} from "./movieRecomendApi";
 
 const GptSearchBar = () => {
     const dispatch = useDispatch();
